@@ -1,4 +1,4 @@
-// 백업파일
+// 백업파일 
 import chalk from 'chalk';
 import readlineSync from 'readline-sync';
 
