@@ -70,25 +70,6 @@ function Monster(s) {
     serve = '가';
   }
 
-  function moreplayfruit(s) { // 몬스터가 피해를 입힐 때 출력할 난수
-    let Monsterfruit = Math.floor(Math.random() * 4);
-    if (s < 6) {
-      switch (Monsterfruit) {
-        case 1:
-          return "으아아아아악!";
-        default:
-          return "으아아아아아아아아악!";
-      }
-    } else {
-      switch (Monsterfruit) {
-        case 1:
-          return "살려줘!!";
-        default:
-          return "도망쳐!!!";
-      }
-    }
-  }
-
   function moreserve() { //조사를 반환하는 메서드
     return serve;
   }
