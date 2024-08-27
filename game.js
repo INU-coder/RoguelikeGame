@@ -1,77 +1,46 @@
 import chalk from 'chalk';
 import readlineSync from 'readline-sync';
 
-function Player() {
-  let hp = 100;
-  let maxHp = 100;
-  let atk = 10;
-
-  // 플레이어가 피해를 입힐 때 출력할 난수
-  function moreplayfruit(s) {
-    let playfruit = Math.floor(Math.random() * 3);
-    if (s < 2) {
-      switch (playfruit) {
-        case 1:
-          return "제사용 방울로 몬스터의 머리를 쳤다.";
-        default:
-          return "제사용 방울로 몬스터의 머리를 쳤다.";
-      }
-    } else {
-      switch (playfruit) {
-        case 1:
-          return "뒤란달로 찔렀다.";
-        case 2:
-          return "제사용 방울로 머리를 쳤다.";
-        default:
-          return "엑스칼리버로 베었다.";
-      }
-    }
+class Player {
+  constructor() {
+    this.hp = 100;
+    this.maxHp = 100;
+    this.atk = 10;
   }
 
-  function attack(m) {
-    let dmg = Math.floor(Math.random() * atk) + 1;
+  attack(m) {
+    let dmg = Math.floor(Math.random() * this.atk) + 1;
     m.Damage(dmg);
     return dmg;
   }
 
-  function heal() {
-    let h = Math.floor(maxHp * 0.2);
-    hp += h;
-    if (hp > maxHp) hp = maxHp;
+  heal() {
+    let h = Math.floor(this.maxHp * 0.2);
+    this.hp += h;
+    if (this.hp > this.maxHp) this.hp = this.maxHp;
   }
 
-  function upgrade() {
-    maxHp += 10;
-    atk += 2;
-    hp = maxHp;
+  upgrade() {
+    this.maxHp += 10;
+    this.atk += 2;
+    this.hp = this.maxHp;
   }
 
-  function Damage(dmg) {
-    hp -= dmg;
+  Damage(dmg) {
+    this.hp -= dmg;
   }
 
-  function moreHP() {
-    return hp;
+  moreHP() {
+    return this.hp;
   }
 
-  function moreMaxHP() {
-    return maxHp;
+  moreMaxHP() {
+    return this.maxHp;
   }
 
-  function moreATK() {
-    return atk;
+  moreATK() {
+    return this.atk;
   }
-
-  return {
-    attack,
-    heal,
-    upgrade,
-    Damage,
-    moreHP,
-    moreMaxHP,
-    moreATK,
-    moreplayfruit,
-  };
 }
 
 function Monster(s) {
@@ -284,7 +253,7 @@ export async function startGame() {
   if ('10스테이지 클리어!') {
     messages.forEach((message, index) => {
       setTimeout(() => {
-        // 특정 메시지에 대해 색상 변경
+        // 특정 메시지에 대해 색상 변경 by server.js
         if (message === `"나는 사이코패스라고 한다."`) {
           console.log(chalk.magenta.bold(message));
         } else if (message === `"공포가 되리라."`) {
