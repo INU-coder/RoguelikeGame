@@ -244,34 +244,34 @@ export async function startGame() {
 
   while (s <= 10) {
     let m = new Monster(s); // 현재 스테이지에 맞는 몬스터 생성
-    let sc = await fight(s, p, m); // 전투 진행, 도망치는 코드에서 true를 반환하면 다음스테이지로.
+    let sc = await fight(s, p, m); // 전투 진행, 도망치는 코드에서 true를 반환하면 다음 스테이지로.
     if (sc) {
       s++; // 스테이지 클리어 시 다음 스테이지로 진행
       p.upgrade(); // 플레이어 업그레이드
-      console.log(chalk.greenBright.bold('10스테이지 클리어!'));
-      
+
+      if (s > 10) {
+        // 스테이지 10 클리어 후 메시지 출력
+        console.log(chalk.greenBright.bold('10스테이지 클리어!'));
+        console.log(chalk.redBright.bold('당신은 알 수 없는 광기에 잡아먹혔습니다!'));
+
+        messages.forEach((message, index) => {
+          setTimeout(() => {
+            // 특정 메시지에 대해 색상 변경 by server.js
+            if (message === `"나는 사이코패스라고 한다."`) {
+              console.log(chalk.magenta.bold(message));
+            } else if (message === `"공포가 되리라."`) {
+              console.log(chalk.red.bold(message));
+            } else if (message === `"나를 통해 이해할 수 있도록."`) {
+              console.log(chalk.magenta.bold(message));
+            } else {
+              console.log(chalk.yellow(message));
+            }
+          }, index * 1000); // 1초(1000ms) 간격으로 출력
+        });
+      }
     } else {
       console.log(chalk.redBright.bold('게임 오버')); // 플레이어 사망 시 게임 종료
       break;
     }
-    if (s >= 10) {
-      console.log(chalk.redBright.bold('당신은 알 수 없는 광기에 잡아먹혔습니다!')); // 스테이지 10 완료 시 출력
-    }
-  }
-  if ('10스테이지 클리어!') {
-    messages.forEach((message, index) => {
-      setTimeout(() => {
-        // 특정 메시지에 대해 색상 변경 by server.js
-        if (message === `"나는 사이코패스라고 한다."`) {
-          console.log(chalk.magenta.bold(message));
-        } else if (message === `"공포가 되리라."`) {
-          console.log(chalk.red.bold(message));
-        } else if (message === `"나를 통해 이해할 수 있도록."`) {
-          console.log(chalk.magenta.bold(message));
-        } else {
-          console.log(chalk.yellow(message));
-        }
-      }, index * 1000); // 1초(1000ms) 간격으로 출력
-    });
   }
 }
