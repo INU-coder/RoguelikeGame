@@ -8,6 +8,34 @@ class Player {
     this.atk = 10;
   }
 
+  moreplayfruit(s) {
+    let playfruit = Math.floor(Math.random() * 3);
+    if (s === 1) {
+      switch (playfruit) {
+        case 1:
+          return "제사용 방울로 몬스터의 머리를 쳤다.";
+        default:
+          return "제사용 방울로 몬스터의 머리를 쳤다.";
+      }
+    } else if (s === 2) {
+      switch (playfruit) {
+        case 1:
+          return "제사용 방울로 몬스터의 머리를 쳤다.";
+        default:
+          return "뒤란달로 찔렀다.";
+      }
+    } else {
+      switch (playfruit) {
+        case 1:
+          return "뒤란달로 찔렀다.";
+        case 2:
+          return "제사용 방울로 머리를 쳤다.";
+        default:
+          return "엑스칼리버로 베었다.";
+      }
+    }
+  }
+
   attack(m) {
     let dmg = Math.floor(Math.random() * this.atk) + 1;
     m.Damage(dmg);
@@ -102,7 +130,6 @@ function Monster(s) {
     moreHP,
     moreName,
     moreserve,
-    moreplayfruit,
   };
 }
 
